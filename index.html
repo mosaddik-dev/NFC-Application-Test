@@ -7,32 +7,32 @@
       const button = document.getElementById("scanBtn");
 
       if ("NDEFReader" in window) {
-        console.log("NFC Supported ✅");
+        alert("NFC Supported ✅");
       } else {
-        console.log("NFC Not Supported ❌");
+        alert("NFC Not Supported ❌");
       }
 
       button.addEventListener("click", async () => {
         try {
           const ndef = new NDEFReader();
           await ndef.scan();
-          console.log("Scan started. Tap NFC tag now...");
+          alert("Scan started. Tap NFC tag now...");
 
           ndef.addEventListener("reading", (event) => {
-            console.log("NFC Data Found:", event);
+            alert("NFC Data Found:", event);
 
             const decoder = new TextDecoder();
             for (const record of event.message.records) {
               const text = decoder.decode(record.data);
-              console.log("Record:", text);
+              alert("Record:", text);
             }
           });
 
           ndef.addEventListener("readingerror", () => {
-            console.log("Error reading NFC tag");
+            alert("Error reading NFC tag");
           });
         } catch (error) {
-          console.error("Scan failed:", error);
+          alert("Scan failed:", error);
         }
       });
     </script>
