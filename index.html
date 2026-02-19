@@ -30,6 +30,7 @@
 
           ndef.addEventListener("readingerror", () => {
             alert("Error reading NFC tag");
+            alert("Error reading NFC tag: " + e.message);
           });
         } catch (error) {
           alert("Scan failed:", error);
