@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <body>
-    <button id="scanBtn">Scan NFC</button>
+    <button id="scanBtn">Scan NFC 2</button>
 
     <script>
       const button = document.getElementById("scanBtn");
@@ -30,7 +30,7 @@
 
           ndef.addEventListener("readingerror", (e) => {
             alert("Error reading NFC tag");
-            alert("Error reading NFC tag: " + e.message);
+            alert("Error reading NFC tag: " + JSON.stringify(e));
           });
         } catch (error) {
           alert("Scan failed:", error);
