@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <body>
+    <button id="scanBtn">Scan NFC</button>
+
+    <script>
+      const button = document.getElementById("scanBtn");
+
+      if ("NDEFReader" in window) {
+        console.log("NFC Supported ✅");
+      } else {
+        console.log("NFC Not Supported ❌");
+      }
+
+      button.addEventListener("click", async () => {
+        try {
+          const ndef = new NDEFReader();
+          await ndef.scan();
+          console.log("Scan started. Tap NFC tag now...");
+
+          ndef.addEventListener("reading", (event) => {
+            console.log("NFC Data Found:", event);
+
+            const decoder = new TextDecoder();
+            for (const record of event.message.records) {
+              const text = decoder.decode(record.data);
+              console.log("Record:", text);
+            }
+          });
+
+          ndef.addEventListener("readingerror", () => {
+            console.log("Error reading NFC tag");
+          });
+        } catch (error) {
+          console.error("Scan failed:", error);
+        }
+      });
+    </script>
+  </body>
+</html>
