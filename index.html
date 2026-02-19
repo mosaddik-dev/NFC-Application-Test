@@ -28,7 +28,7 @@
             }
           });
 
-          ndef.addEventListener("readingerror", () => {
+          ndef.addEventListener("readingerror", (e) => {
             alert("Error reading NFC tag");
             alert("Error reading NFC tag: " + e.message);
           });
